@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "ThumbnailCropAndLockWindow.h"
 
 const std::wstring ThumbnailCropAndLockWindow::ClassName = L"CropAndLock.ThumbnailCropAndLockWindow";
@@ -59,6 +59,10 @@ void ThumbnailCropAndLockWindow::RegisterWindowClass()
     winrt::check_bool(RegisterClassExW(&wcex));
 }
 
+POINT m_initialMousePos;
+POINT m_initialWindowPos;
+bool m_isDragging = false;
+
 ThumbnailCropAndLockWindow::ThumbnailCropAndLockWindow(std::wstring const& titleString, int width, int height)
 {
     auto instance = winrt::check_pointer(GetModuleHandleW(nullptr));
@@ -66,7 +70,9 @@ ThumbnailCropAndLockWindow::ThumbnailCropAndLockWindow(std::wstring const& title
     std::call_once(ThumbnailCropAndLockWindowClassRegistration, []() { RegisterWindowClass(); });
 
     auto exStyle = 0;
-    auto style = WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN;
+    //auto style = WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN;
+    // Remove WS_CAPTION caption style, keep WS_THICKFRAME for allowing resize
+    auto style = WS_POPUP | WS_THICKFRAME | WS_CLIPCHILDREN;
 
     RECT rect = { 0, 0, width, height};
     winrt::check_bool(AdjustWindowRectEx(&rect, style, false, exStyle));
@@ -109,6 +115,49 @@ LRESULT ThumbnailCropAndLockWindow::MessageHandler(UINT const message, WPARAM co
             properties.dwFlags = DWM_TNP_RECTDESTINATION;
             properties.rcDestination = m_destRect;
             winrt::check_hresult(DwmUpdateThumbnailProperties(m_thumbnail.get(), &properties));
+        }
+    }
+    break;
+    case WM_LBUTTONDOWN:
+    {
+        // Capture the initial mouse position
+        m_initialMousePos.x = GET_X_LPARAM(lparam);
+        m_initialMousePos.y = GET_Y_LPARAM(lparam);
+
+        // Capture the initial window position
+        RECT windowRect;
+        GetWindowRect(m_window, &windowRect);
+        m_initialWindowPos.x = windowRect.left;
+        m_initialWindowPos.y = windowRect.top;
+
+        // Capture the mouse
+        SetCapture(m_window);
+        m_isDragging = true;
+    }
+    break;
+    case WM_MOUSEMOVE:
+    {
+        if (m_isDragging)
+        {
+            // Calculate the new window position
+            POINT currentMousePos;
+            currentMousePos.x = GET_X_LPARAM(lparam);
+            currentMousePos.y = GET_Y_LPARAM(lparam);
+
+            int deltaX = currentMousePos.x - m_initialMousePos.x;
+            int deltaY = currentMousePos.y - m_initialMousePos.y;
+
+            SetWindowPos(m_window, nullptr, m_initialWindowPos.x + deltaX, m_initialWindowPos.y + deltaY, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+        }
+    }
+    break;
+    case WM_LBUTTONUP:
+    {
+        if (m_isDragging)
+        {
+            // Release the mouse capture
+            ReleaseCapture();
+            m_isDragging = false;
         }
     }
     break;

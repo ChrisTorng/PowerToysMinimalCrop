@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "ReparentCropAndLockWindow.h"
 
 const std::wstring ReparentCropAndLockWindow::ClassName = L"CropAndLock.ReparentCropAndLockWindow";
@@ -29,6 +29,8 @@ ReparentCropAndLockWindow::ReparentCropAndLockWindow(std::wstring const& titleSt
     auto exStyle = 0;
     auto style = WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN;
     style &= ~(WS_MAXIMIZEBOX | WS_THICKFRAME);
+    // Remove WS_CAPTION caption style, keep WS_THICKFRAME for allowing resize
+    //auto style = WS_OVERLAPPED | WS_THICKFRAME | WS_CLIPCHILDREN;
 
     RECT rect = { 0, 0, width, height};
     winrt::check_bool(AdjustWindowRectEx(&rect, style, false, exStyle));
@@ -167,8 +169,8 @@ void ReparentCropAndLockWindow::DisconnectTarget()
             // The child window was closed by other means?
             m_currentTarget = nullptr;
             return;
-        }        
-        
+        }
+
         RestoreOriginalState();
     }
 }
@@ -204,7 +206,7 @@ void ReparentCropAndLockWindow::RestoreOriginalState()
         // Restore the original placement
         if (originalPlacement.showCmd != SW_SHOWMAXIMIZED)
         {
-            originalPlacement.showCmd = SW_RESTORE;            
+            originalPlacement.showCmd = SW_RESTORE;
         }
 
         winrt::check_bool(SetWindowPlacement(m_currentTarget, &originalPlacement));
@@ -215,6 +217,6 @@ void ReparentCropAndLockWindow::RestoreOriginalState()
         winrt::check_bool(prevExStyle != 0 || GetLastError() == ERROR_SUCCESS);
 
         LONG_PTR prevStyle = SetWindowLongPtr(m_currentTarget, GWL_STYLE, originalStyle);
-        winrt::check_bool(prevStyle != 0 || GetLastError() == ERROR_SUCCESS);        
+        winrt::check_bool(prevStyle != 0 || GetLastError() == ERROR_SUCCESS);
     }
 }
