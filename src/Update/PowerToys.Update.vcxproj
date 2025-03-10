@@ -9,6 +9,7 @@
     <ProjectGuid>{44CE9AE1-4390-42C5-BACC-0FD6B40AA203}</ProjectGuid>
     <RootNamespace>Update</RootNamespace>
     <ProjectName>PowerToys.Update</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">

@@ -13,6 +13,7 @@
     <ProjectGuid>{2edb3eb4-fa92-4bff-b2d8-566584837231}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ShortcutGuide</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">

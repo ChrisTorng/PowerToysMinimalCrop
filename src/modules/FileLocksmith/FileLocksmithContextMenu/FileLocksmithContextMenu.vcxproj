@@ -9,6 +9,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{799a50d8-de89-4ed1-8ff8-ad5a9ed8c0ca}</ProjectGuid>
     <RootNamespace>FileLocksmithContextMenu</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup>

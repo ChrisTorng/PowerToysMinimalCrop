@@ -6,6 +6,7 @@
     <ProjectGuid>{2833C9C6-AB32-4048-A5C7-A70898337B57}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>MouseWithoutBordersModuleInterface</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">

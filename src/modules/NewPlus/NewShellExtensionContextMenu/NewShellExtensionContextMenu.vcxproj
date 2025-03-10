@@ -9,7 +9,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{8acb33d9-c95b-47d4-8363-9731ee0930a0}</ProjectGuid>
     <RootNamespace>NewPlusShellExtension</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.20348.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
     <ProjectName>NewPlus.ShellExtension</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

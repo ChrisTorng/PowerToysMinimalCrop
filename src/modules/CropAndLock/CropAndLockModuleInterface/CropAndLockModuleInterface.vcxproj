@@ -7,6 +7,7 @@
     <ProjectGuid>{3157fa75-86cf-4ee2-8f62-c43f776493c6}</ProjectGuid>
     <RootNamespace>CropAndLockModuleInterface</RootNamespace>
     <ProjectName>CropAndLockModuleInterface</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">

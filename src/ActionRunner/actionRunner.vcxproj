@@ -9,6 +9,7 @@
     <ProjectGuid>{D29DDD63-E2CF-4657-9FD5-2AEDE4257E5D}</ProjectGuid>
     <RootNamespace>actionRunner</RootNamespace>
     <ProjectName>PowerToys.ActionRunner</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">
